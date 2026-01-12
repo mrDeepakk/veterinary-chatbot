@@ -1,219 +1,76 @@
 # 🐾 Veterinary Chatbot SDK
 
-Production-grade, embeddable chatbot for veterinary clinics with AI-powered question answering and conversational appointment booking.
+A production-ready, embeddable veterinary chatbot with **AI-powered pet Q&A** and **conversational appointment booking**.
 
-## 🚀 Quick Start
+**Live Demo:**  
+https://veterinary-chatbot-c0c8.onrender.com/demo/index.html
 
-```bash
-# 1. Install dependencies
-cd server
-npm install
+---
 
-cd ../widget
-npm install
+## 🚀 What this is
 
-# 2. Set up environment
-cd ../server
-cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY and MONGODB_URI
+This project is a **website-integrated chatbot SDK** for veterinary clinics.  
+It can be embedded into **any website** using a single `<script>` tag and provides:
 
-# 3. Run the server (auto-builds everything!)
-npm run dev
-```
-
-Visit **http://localhost:3000/demo/** to see the chatbot in action!
-
-### 🐳 Quick Start with Docker
-
-```bash
-# 1. Create environment file
-cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
-
-# 2. Start with Docker Compose
-docker-compose up -d
-
-# 3. Access the demo
-# http://localhost:3000/demo/
-```
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for complete Docker deployment guide.
-
-### 🌐 Deploy to Render
-
-```bash
-# 1. Build widget locally
-cd server && npm run build
-
-# 2. Commit build artifacts
-git add public/ && git commit -m "Build widget"
-
-# 3. Push to trigger Render deployment
-git push origin main
-```
-
-See [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for complete Render deployment guide.
+- AI-based answers to veterinary questions  
+- Real-time conversational appointment booking  
+- Persistent chat & booking storage in MongoDB  
 
 ---
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Q&A** - Google Gemini integration for veterinary questions
-- 📅 **Appointment Booking** - Full conversational booking flow
-- 🔄 **State Machine** - Robust booking state management
-- 💾 **MongoDB Storage** - Persistent conversations and appointments
-- 🎨 **React Widget** - Beautiful floating chat interface
-- 🔌 **Easy Integration** - Single script tag to embed anywhere
+- 🤖 AI Vet Assistant (Google Gemini)  
+- 🐶 Vet-only responses enforced  
+- 📅 Conversational appointment booking  
+- 🔄 State-machine driven booking flow  
+- 💾 MongoDB for chat & appointments  
+- 🎨 React floating chat widget  
+- 🔌 One-line SDK integration  
 
 ---
 
+## 🖥️ Demo
 
-## 🔧 Development
+Open the live demo and try:
+- “What should I feed my puppy?”
+- “My dog is sick”
+- “Book an appointment”
 
-### Run Development Server
-```bash
-cd server
-npm run dev
-```
-✅ Auto-builds widget and SDK loader  
-✅ Starts server with hot-reload  
-✅ Available at http://localhost:3000
-
-### Build Only
-```bash
-cd server
-npm run build
-```
-
-### Widget Development
-```bash
-# Terminal 1 - Widget dev server
-cd widget
-npm start
-
-# Terminal 2 - Backend server
-cd server
-npm run dev
-```
+👉 https://veterinary-chatbot-c0c8.onrender.com/demo/index.html
 
 ---
 
-## 🔌 Integration
-
-Add the chatbot to any website:
+## 🔌 Website Integration
 
 ```html
-<!-- Optional: Configure chatbot -->
 <script>
   window.VetChatbotConfig = {
-    userId: "user_123",
     userName: "John",
     petName: "Buddy"
   };
-  
-  window.VET_CHATBOT_API_URL = "http://localhost:3000";
-  window.VET_CHATBOT_WIDGET_URL = "http://localhost:3000/widget.js";
 </script>
 
-<!-- Load chatbot SDK -->
-<script src="http://localhost:3000/chatbot.js"></script>
+<script src="https://veterinary-chatbot-c0c8.onrender.com/chatbot.js"></script>
 ```
 
-That's it! The floating button will appear automatically.
+## ⚙️ Local Setup
 
----
+```bash
+git clone https://github.com/mrDeepakk/veterinary-chatbot.git
 
-## 📚 API Endpoints
+cd veterinary-chatbot/server
+npm install
 
-### Chat
-- `POST /api/chat/message` - Send message to chatbot
-- `GET /api/chat/history/:sessionId` - Get conversation history
+cd ../widget
+npm install
 
-### Appointments
-- `POST /api/appointment/book` - Book appointment (legacy)
-- `GET /api/appointment/:sessionId` - Get appointments for session
+cd ../server
+cp .env.example .env
+# Add GEMINI_API_KEY and MONGODB_URI
 
-### Health
-- `GET /health` - Server health check
-
----
-
-## 🛠️ Technologies
-
-**Backend:**
-- Node.js + Express
-- MongoDB + Mongoose
-- Google Gemini AI
-- Chrono-node (date parsing)
-
-**Frontend:**
-- React
-- Webpack
-- CSS-in-JS
-
-**Architecture:**
-- State machine pattern
-- Service layer architecture
-- Conversation persistence
-- Session management
-
-**Docker & Deployment:**
-- Multi-stage Docker builds
-- Docker Compose orchestration
-- Production-ready configurations
-- Health checks & monitoring
-
----
-
-
----
-
-## 🔐 Environment Variables
-
-Create `.env` in the `server/` directory:
-
-```env
-# Required
-GEMINI_API_KEY=your_gemini_api_key_here
-MONGODB_URI=mongodb://localhost:27017/veterinary-chatbot
-
-# Optional
-PORT=3000
-NODE_ENV=development
-CORS_ORIGIN=*
+npm run dev
 ```
+### Open:
+http://localhost:3000/demo
 
----
-
-## 🧪 Testing
-
-Try these messages in the demo:
-
-**AI Questions:**
-- "What should I feed my puppy?"
-- "How often should I vaccinate my dog?"
-- "My cat is not eating, what should I do?"
-
-**Booking:**
-- "I want to book an appointment"
-- "Schedule a visit"
-- "My pet is sick" (triggers booking)
-
-**Validation Tests:**
-- Invalid name: "John123" (rejects numbers)
-- Invalid phone: "abc" (validates format)
-- Past date: "Yesterday at 4pm" (requires future date)
-
----
-
-
-## 🤝 Contributing
-
-This is a production-ready SDK. Feel free to extend it with:
-- Additional booking features (cancellation, rescheduling)
-- Email/SMS notifications
-- Multi-language support
-- Custom theming
-- More AI capabilities
-
----
