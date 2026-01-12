@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veterinary Chatbot - Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      background: white;
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      font-size: 36px;
+      color: #111827;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .feature {
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+    
+    .feature-desc {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    
+    .info-box h3 {
+      color: #1e40af;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    
+    .info-box p {
+      color: #1e3a8a;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span>🐾</span>
+      Veterinary Chatbot Demo
+    </h1>
+    <p class="subtitle">
+      AI-powered chatbot for veterinary questions and appointment booking
+    </p>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🤖</div>
+        <div class="feature-title">AI Assistant</div>
+        <div class="feature-desc">Ask questions about pet health, nutrition, and care</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📅</div>
+        <div class="feature-title">Book Appointments</div>
+        <div class="feature-desc">Schedule vet visits through conversation</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">Conversational</div>
+        <div class="feature-desc">Natural, friendly chat interface</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Secure</div>
+        <div class="feature-desc">Conversations stored securely in MongoDB</div>
+      </div>
+    </div>
+    
+    <div class="info-box">
+      <h3>👇 Try the Chatbot!</h3>
+      <p>
+        Click the floating button in the bottom-right corner to start chatting.
+        Try asking about pet health topics or say "book appointment" to test the booking flow.
+      </p>
+    </div>
+    
+    <div class="info-box">
+      <h3>🔧 Integration</h3>
+      <p>
+        To add this chatbot to your website, simply include:<br>
+        <code>&lt;script src="http://localhost:3000/chatbot.js"&gt;&lt;/script&gt;</code>
+      </p>
+    </div>
+  </div>
+
+  <!-- Chatbot Configuration (Optional) -->
+  <script>
+    window.VetChatbotConfig = {
+      userId: "demo_user_123",
+      userName: "John",
+      petName: "Buddy",
+      source: "demo_page"
+    };
+
+    // Set API URL for development
+    window.VET_CHATBOT_API_URL = "http://localhost:3000";
+    window.VET_CHATBOT_WIDGET_URL = "http://localhost:3000/widget.js";
+  </script>
+  
+  <!-- Load Chatbot SDK -->
+  <script src="http://localhost:3000/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+.vet-chat-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+    z-index: 999999;
+}
+
+.vet-chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.vet-chat-button:active {
+    transform: scale(0.95);
+}
+
+.vet-chat-notification-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 18px;
+    animation: vet-chat-pulse 2s infinite;
+}
+
+@keyframes vet-chat-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}

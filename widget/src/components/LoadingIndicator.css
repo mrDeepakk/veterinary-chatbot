@@ -1,0 +1,37 @@
+.vet-chat-loading {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.vet-chat-loading-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.vet-chat-loading-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #6366f1;
+  animation: vet-chat-bounce 1.4s infinite ease-in-out both;
+}
+
+.vet-chat-loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.vet-chat-loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes vet-chat-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
