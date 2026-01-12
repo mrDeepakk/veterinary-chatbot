@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: vet-chatbot-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: veterinary-chatbot
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - vet-chatbot-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # Veterinary Chatbot Server
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: vet-chatbot-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongodb:27017/veterinary-chatbot
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - CORS_ORIGIN=${CORS_ORIGIN:-*}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - vet-chatbot-network
+    volumes:
+      # Mount logs directory for persistence (optional)
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1); })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Mongo Express (Development Only - Remove in Production)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: vet-chatbot-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASSWORD:-changeme}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - vet-chatbot-network
+    profiles:
+      - dev
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+
+networks:
+  vet-chatbot-network:
+    driver: bridge

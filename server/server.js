@@ -46,8 +46,19 @@ app.use('/api/appointment', appointmentRoutes);
 
 // Serve static files (SDK and demo)
 const path = require('path');
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/demo', express.static(path.join(__dirname, '../demo')));
+const fs = require('fs');
+
+// Determine correct paths for local vs Docker environment
+const publicPath = fs.existsSync(path.join(__dirname, 'public')) 
+    ? path.join(__dirname, 'public')  // Docker: public is sibling to server.js
+    : path.join(__dirname, '../public'); // Local: public is in parent directory
+
+const demoPath = fs.existsSync(path.join(__dirname, 'public/demo'))
+    ? path.join(__dirname, 'public/demo')  // Docker: demo is in public/demo
+    : path.join(__dirname, '../demo');  // Local: demo is in parent/demo
+
+app.use(express.static(publicPath));
+app.use('/demo', express.static(demoPath));
 
 // 404 handler
 app.use(notFoundHandler);

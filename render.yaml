@@ -1,0 +1,38 @@
+services:
+  # Veterinary Chatbot Web Service
+  - type: web
+    name: veterinary-chatbot
+    env: docker
+    region: oregon
+    plan: starter
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: .
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: GEMINI_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: MONGODB_URI
+        fromDatabase:
+          name: veterinary-chatbot-db
+          property: connectionString
+      - key: CORS_ORIGIN
+        value: "*"
+    healthCheckPath: /health
+    
+  # MongoDB Database (Optional - use MongoDB Atlas instead for production)
+  # - type: pserv
+  #   name: veterinary-chatbot-db
+  #   env: docker
+  #   plan: starter
+  #   dockerfilePath: ./Dockerfile.mongo
+  #   dockerContext: .
+  #   disk:
+  #     name: mongodb-data
+  #     mountPath: /data/db
+  #     sizeGB: 1
+
+# Note: For production, use MongoDB Atlas (free tier available)
+# and set MONGODB_URI environment variable in Render dashboard

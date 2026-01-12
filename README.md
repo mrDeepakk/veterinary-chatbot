@@ -23,6 +23,37 @@ npm run dev
 
 Visit **http://localhost:3000/demo/** to see the chatbot in action!
 
+### 🐳 Quick Start with Docker
+
+```bash
+# 1. Create environment file
+cp .env.example .env
+# Edit .env and add your GEMINI_API_KEY
+
+# 2. Start with Docker Compose
+docker-compose up -d
+
+# 3. Access the demo
+# http://localhost:3000/demo/
+```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete Docker deployment guide.
+
+### 🌐 Deploy to Render
+
+```bash
+# 1. Build widget locally
+cd server && npm run build
+
+# 2. Commit build artifacts
+git add public/ && git commit -m "Build widget"
+
+# 3. Push to trigger Render deployment
+git push origin main
+```
+
+See [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for complete Render deployment guide.
+
 ---
 
 ## ✨ Features
@@ -125,6 +156,12 @@ That's it! The floating button will appear automatically.
 - Service layer architecture
 - Conversation persistence
 - Session management
+
+**Docker & Deployment:**
+- Multi-stage Docker builds
+- Docker Compose orchestration
+- Production-ready configurations
+- Health checks & monitoring
 
 ---
 
